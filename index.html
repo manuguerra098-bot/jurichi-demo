@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jurichi — Demo Sistema de Pedidos IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@400;500&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rojo: #D63B2F;
+  --rojo-bg: #FCEBEB;
+  --verde: #1D9E75;
+  --verde-bg: #EAF3DE;
+  --azul: #185FA5;
+  --azul-bg: #E6F1FB;
+  --tg: #229ED9;
+  --amber: #854F0B;
+  --amber-bg: #FAEEDA;
+  --bg: #FAFAF8;
+  --card: #FFFFFF;
+  --borde: #E8E6E0;
+  --borde2: #D0CEC8;
+  --texto: #111110;
+  --texto2: #6B6A65;
+  --texto3: #999894;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Syne', sans-serif;
+  background: var(--bg);
+  color: var(--texto);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── HEADER ── */
+header {
+  border-bottom: 1px solid var(--borde);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-kanji {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 18px;
+  color: var(--rojo);
+  font-weight: 300;
+}
+.logo-nombre {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--texto);
+}
+.header-badge {
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--rojo-bg);
+  color: var(--rojo);
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 5rem 2rem 4rem;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+.hero-tag {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--texto3);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--borde2);
+  padding: 5px 12px;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 6vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.2rem;
+}
+.hero h1 span { color: var(--rojo); }
+.hero p {
+  font-size: 1.1rem;
+  color: var(--texto2);
+  font-weight: 400;
+  max-width: 520px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* ── TABS DE ESCENARIOS ── */
+.tabs-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: 1px solid var(--borde2);
+  border-radius: 30px;
+  background: #fff;
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .2s;
+  color: var(--texto2);
+}
+.tab svg { width: 16px; height: 16px; }
+.tab:hover { border-color: var(--borde2); background: var(--bg); }
+.tab.active-pedido { background: var(--verde-bg); color: #0F6E56; border-color: var(--verde); }
+.tab.active-consulta { background: var(--azul-bg); color: var(--azul); border-color: #378ADD; }
+.tab.active-cancel { background: var(--rojo-bg); color: var(--rojo); border-color: var(--rojo); }
+
+/* ── DEMO CONTAINER ── */
+.demo-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* ── WHATSAPP MOCKUP ── */
+.wa-device {
+  background: #ECE5DD;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--borde);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.wa-header {
+  background: #075E54;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.wa-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.wa-info { flex: 1; }
+.wa-nombre { color: #fff; font-size: 13px; font-weight: 500; }
+.wa-status { color: #b2dfdb; font-size: 10px; font-family: 'DM Mono', monospace; }
+.wa-body {
+  padding: 12px 10px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.wa-msg-in {
+  background: #fff;
+  border-radius: 0 10px 10px 10px;
+  padding: 8px 11px;
+  font-size: 12.5px;
+  color: #111;
+  max-width: 90%;
+  line-height: 1.4;
+  font-family: 'Noto Sans JP', sans-serif;
+  border: 0.5px solid #e0ddd9;
+}
+.wa-msg-out {
+  background: #DCF8C6;
+  border-radius: 10px 0 10px 10px;
+  padding: 8px 11px;
+  font-size: 12.5px;
+  color: #111;
+  max-width: 90%;
+  line-height: 1.4;
+  align-self: flex-end;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.wa-time { font-size: 9px; color: #888; margin-top: 3px; text-align: right; font-family: 'DM Mono', monospace; }
+.wa-typing {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  padding: 4px 0;
+}
+.wa-typing span {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #888;
+  animation: blink 1.2s infinite;
+}
+.wa-typing span:nth-child(2) { animation-delay: .2s; }
+.wa-typing span:nth-child(3) { animation-delay: .4s; }
+@keyframes blink { 0%,80%,100%{opacity:.3} 40%{opacity:1} }
+
+/* ── FLUJO ── */
+.flujo { display: flex; flex-direction: column; gap: 0; }
+.paso-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  opacity: 0.25;
+  transition: opacity .3s;
+}
+.paso-row.activo { opacity: 1; }
+.paso-row.hecho { opacity: 0.55; }
+
+.paso-izq {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 32px;
+  flex-shrink: 0;
+}
+.paso-dot {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+  border: 1.5px solid var(--borde2);
+  background: var(--bg);
+  color: var(--texto3);
+  transition: all .3s;
+}
+.paso-row.activo .paso-dot {
+  border-width: 2px;
+}
+.paso-row.hecho .paso-dot {
+  border-color: var(--verde);
+  background: var(--verde-bg);
+  color: var(--verde);
+}
+.paso-linea {
+  width: 1.5px;
+  flex: 1;
+  min-height: 12px;
+  background: var(--borde);
+  margin: 4px 0;
+}
+.paso-card {
+  flex: 1;
+  background: var(--card);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  transition: border-color .3s, background .3s;
+}
+.paso-row.activo .paso-card {
+  border-width: 1.5px;
+}
+.paso-titulo {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin-bottom: 3px;
+}
+.paso-desc {
+  font-size: 12px;
+  color: var(--texto2);
+  line-height: 1.5;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* ── EXTRAS DENTRO DE CARDS ── */
+.extra { margin-top: 10px; }
+.mini-card {
+  background: var(--bg);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 11.5px;
+}
+.mini-label {
+  font-size: 10px;
+  color: var(--texto3);
+  font-family: 'DM Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 5px;
+}
+.mini-row {
+  display: flex;
+  justify-content: space-between;
+  color: var(--texto2);
+  padding: 2px 0;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.mini-row strong { color: var(--texto); font-weight: 500; }
+.mini-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  padding-top: 6px;
+  margin-top: 4px;
+  border-top: 1px solid var(--borde);
+  font-size: 12px;
+}
+.aprobacion-btns {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+.btn-ap {
+  flex: 1;
+  padding: 7px;
+  border-radius: 8px;
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1.5px solid;
+  cursor: default;
+  text-align: center;
+}
+.btn-ap-ok { background: var(--verde-bg); color: #0F6E56; border-color: var(--verde); }
+.btn-ap-no { background: var(--rojo-bg); color: var(--rojo); border-color: var(--rojo); }
+.tg-notif {
+  background: #E8F6FD;
+  border: 1px solid #229ED9;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+.tg-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.tg-av {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: #229ED9;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+}
+.tg-bot-name { font-size: 11px; font-weight: 700; color: #185FA5; font-family: 'DM Mono', monospace; }
+.tg-msg { font-size: 11.5px; color: #0d3a5c; line-height: 1.5; font-family: 'Noto Sans JP', sans-serif; white-space: pre-line; }
+
+/* ── BADGE ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 10.5px;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+.badge-green { background: var(--verde-bg); color: #0F6E56; }
+.badge-red { background: var(--rojo-bg); color: var(--rojo); }
+.badge-blue { background: var(--azul-bg); color: var(--azul); }
+.badge-amber { background: var(--amber-bg); color: var(--amber); }
+
+/* ── CONTROLES ── */
+.controles {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--borde);
+}
+.ctrl-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border: 1px solid var(--borde2);
+  border-radius: 30px;
+  background: #fff;
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .15s;
+  color: var(--texto);
+}
+.ctrl-btn:hover:not(:disabled) { background: var(--bg); border-color: var(--texto2); }
+.ctrl-btn:disabled { opacity: 0.3; cursor: default; }
+.ctrl-btn.primary { background: var(--texto); color: #fff; border-color: var(--texto); }
+.ctrl-btn.primary:hover:not(:disabled) { background: #333; border-color: #333; }
+.ctrl-counter { font-size: 12px; color: var(--texto3); font-family: 'DM Mono', monospace; margin-left: 4px; }
+.ctrl-reset { margin-left: auto; font-size: 12px; color: var(--texto3); background: none; border: none; cursor: pointer; font-family: 'Syne', sans-serif; text-decoration: underline; }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid var(--borde);
+  font-size: 12px;
+  color: var(--texto3);
+  font-family: 'DM Mono', monospace;
+}
+footer span { color: var(--rojo); }
+
+@media (max-width: 600px) {
+  .demo-grid { grid-template-columns: 1fr; }
+  .wa-device { max-width: 280px; margin: 0 auto; }
+  .hero h1 { font-size: 2rem; }
+  header { padding: 0 1rem; }
+  .demo-container { padding: 0 1rem 3rem; }
+  .hero { padding: 3rem 1rem 2rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span class="logo-kanji">ジュリチ</span>
+    <span class="logo-nombre">JURICHI</span>
+  </div>
+  <span class="header-badge">DEMO · SISTEMA IA</span>
+</header>
+
+<div class="hero">
+  <div class="hero-tag">Simulación interactiva · Automatización de pedidos</div>
+  <h1>Pedidos que se<br>procesan <span>solos</span></h1>
+  <p>Así funciona el sistema de IA para Jurichi. Elegí un escenario y navegá el flujo paso a paso.</p>
+</div>
+
+<div class="demo-container">
+  <div class="tabs-wrap" id="tabs"></div>
+
+  <div class="demo-grid">
+    <div>
+      <div class="wa-device">
+        <div class="wa-header">
+          <div class="wa-avatar" id="wa-av">MG</div>
+          <div class="wa-info">
+            <div class="wa-nombre" id="wa-nombre">Maria G.</div>
+            <div class="wa-status">en línea</div>
+          </div>
+        </div>
+        <div class="wa-body" id="wa-body"></div>
+      </div>
+    </div>
+    <div>
+      <div class="flujo" id="flujo"></div>
+    </div>
+  </div>
+
+  <div class="controles">
+    <button class="ctrl-btn" id="btn-prev" onclick="prevPaso()">← Anterior</button>
+    <button class="ctrl-btn primary" id="btn-next" onclick="nextPaso()">Siguiente →</button>
+    <span class="ctrl-counter" id="counter">Paso 1 de 5</span>
+    <button class="ctrl-reset" onclick="reset()">Reiniciar</button>
+  </div>
+</div>
+
+<footer>
+  <p>Jurichi · Sistema de Automatización con IA · <span>©2026</span></p>
+</footer>
+
+<script>
+const CASOS = [
+  {
+    tab: "Pedido nuevo", tabClass: "active-pedido",
+    nombre: "Maria G.", av: "MG",
+    waIn: "hola! mándame 10 onigiri de salmón y 5 spicy tuna porfa",
+    waOut: "Pedido recibido, Maria. Te confirmamos en un momento!",
+    pasos: [
+      { color:"#1D9E75", bg:"#EAF3DE", txt:"#0F6E56",
+        titulo:"WhatsApp recibe el mensaje",
+        desc:"\"hola! mándame 10 onigiri de salmón y 5 spicy tuna porfa\"",
+        extra: null },
+      { color:"#185FA5", bg:"#E6F1FB", txt:"#185FA5",
+        titulo:"Claude AI interpreta el pedido",
+        desc:"Identifica cliente, productos y cantidades aunque el texto sea informal.",
+        extra: {tipo:"ia", items:["10× Onigiri Salmón","5× Spicy Tuna"], total:"$22.500", conf:"Alta"} },
+      { color:"#1D9E75", bg:"#EAF3DE", txt:"#0F6E56",
+        titulo:"Encargado aprueba (Nivel 1)",
+        desc:"Le llega el resumen. Aprueba o rechaza con un toque.",
+        extra: {tipo:"aprobacion"} },
+      { color:"#854F0B", bg:"#FAEEDA", txt:"#854F0B",
+        titulo:"Fudo registra la orden",
+        desc:"Entra a Fudo, se genera comanda en cocina y se descuenta stock.",
+        extra: {tipo:"fudo", items:["10× Onigiri Salmón","5× Spicy Tuna"], total:"$22.500", estado:"Confirmado"} },
+      { color:"#229ED9", bg:"#E8F6FD", txt:"#185FA5",
+        titulo:"Telegram notifica al grupo",
+        desc:"Todo el equipo ve el pedido en tiempo real.",
+        extra: {tipo:"tg", badge:"PEDIDO NUEVO", badgeClass:"badge-green",
+          msg:"Cliente: Maria G.\n10× Onigiri Salmón · 5× Spicy Tuna\nTotal: $22.500 · Canal: WhatsApp"} }
+    ]
+  },
+  {
+    tab: "Consulta", tabClass: "active-consulta",
+    nombre: "Carlos V.", av: "CV",
+    waIn: "che, tienen gluten los onigiris? tengo celiaquía",
+    waOut: "Hola Carlos! Tu consulta fue enviada al equipo, te responden ya",
+    pasos: [
+      { color:"#185FA5", bg:"#E6F1FB", txt:"#185FA5",
+        titulo:"WhatsApp recibe el mensaje",
+        desc:"\"che, tienen gluten los onigiris? tengo celiaquía\"",
+        extra: null },
+      { color:"#185FA5", bg:"#E6F1FB", txt:"#185FA5",
+        titulo:"Claude AI clasifica el mensaje",
+        desc:"Detecta que no es un pedido — es una consulta sobre ingredientes.",
+        extra: {tipo:"clasificacion", label:"No es pedido — es una consulta", cls:"badge-blue"} },
+      { color:"#229ED9", bg:"#E8F6FD", txt:"#185FA5",
+        titulo:"Telegram alerta al equipo",
+        desc:"El grupo recibe la consulta con el texto original para responder.",
+        extra: {tipo:"tg", badge:"CONSULTA", badgeClass:"badge-blue",
+          msg:"Cliente: Carlos V.\n\"tienen gluten los onigiris? tengo celiaquía\"\nRequiere respuesta manual"} },
+      { color:"#1D9E75", bg:"#EAF3DE", txt:"#0F6E56",
+        titulo:"Equipo responde directamente",
+        desc:"Un integrante ve la alerta y responde al cliente desde WhatsApp.",
+        extra: null },
+      { color:"#1D9E75", bg:"#EAF3DE", txt:"#0F6E56",
+        titulo:"Consulta resuelta",
+        desc:"El cliente recibió respuesta sin que Julián tuviera que estar mirando el teléfono.",
+        extra: null }
+    ]
+  },
+  {
+    tab: "Cancelación", tabClass: "active-cancel",
+    nombre: "Laura M.", av: "LM",
+    waIn: "disculpá, necesito cancelar el pedido de hoy, cambié de planes",
+    waOut: "Entendido Laura, tu pedido fue cancelado. Cualquier cosa avisanos!",
+    pasos: [
+      { color:"#D63B2F", bg:"#FCEBEB", txt:"#A32D2D",
+        titulo:"WhatsApp recibe la cancelación",
+        desc:"\"necesito cancelar el pedido de hoy, cambié de planes\"",
+        extra: null },
+      { color:"#185FA5", bg:"#E6F1FB", txt:"#185FA5",
+        titulo:"Claude AI detecta cancelación",
+        desc:"Identifica la intención de cancelar y localiza el pedido activo de Laura.",
+        extra: {tipo:"clasificacion", label:"Cancelación detectada", cls:"badge-red"} },
+      { color:"#D63B2F", bg:"#FCEBEB", txt:"#A32D2D",
+        titulo:"Encargado confirma la baja",
+        desc:"Las cancelaciones siempre requieren aprobación humana — nunca son automáticas.",
+        extra: {tipo:"aprobacion-cancel"} },
+      { color:"#854F0B", bg:"#FAEEDA", txt:"#854F0B",
+        titulo:"Fudo da de baja la orden",
+        desc:"La orden se cancela. El stock vuelve a su estado anterior. Queda registro.",
+        extra: {tipo:"fudo-cancel"} },
+      { color:"#229ED9", bg:"#E8F6FD", txt:"#185FA5",
+        titulo:"Telegram notifica la baja",
+        desc:"El grupo recibe la notificación con detalle del pedido anulado.",
+        extra: {tipo:"tg", badge:"CANCELACIÓN", badgeClass:"badge-red",
+          msg:"Cliente: Laura M.\nPedido cancelado por el cliente\nStock restaurado · P&L actualizado"} }
+    ]
+  }
+];
+
+let casoActual = 0, pasoActual = 0;
+
+function buildTabs() {
+  const wrap = document.getElementById('tabs');
+  wrap.innerHTML = '';
+  CASOS.forEach((c, i) => {
+    const b = document.createElement('button');
+    b.className = 'tab' + (i === casoActual ? ' ' + c.tabClass : '');
+    b.innerHTML = c.tab;
+    b.onclick = () => { casoActual = i; pasoActual = 0; buildTabs(); render(); };
+    wrap.appendChild(b);
+  });
+}
+
+function buildExtra(extra, pasoColor, pasoBg) {
+  if (!extra) return '';
+  const e = extra;
+  if (e.tipo === 'ia') return `
+    <div class="extra mini-card">
+      <div class="mini-label">Pedido interpretado</div>
+      ${e.items.map(it => `<div class="mini-row"><span>${it}</span></div>`).join('')}
+      <div class="mini-total"><span>Total</span><span>${e.total}</span></div>
+      <div style="margin-top:8px"><span class="badge badge-green">Confianza: ${e.conf}</span></div>
+    </div>`;
+  if (e.tipo === 'clasificacion') return `
+    <div class="extra" style="padding:7px 10px;background:${pasoBg};border-radius:8px;border:1px solid ${pasoColor}33">
+      <span class="badge ${e.cls}">${e.label}</span>
+    </div>`;
+  if (e.tipo === 'aprobacion') return `
+    <div class="extra aprobacion-btns">
+      <div class="btn-ap btn-ap-ok">✓ Aprobar</div>
+      <div class="btn-ap btn-ap-no">✗ Rechazar</div>
+    </div>`;
+  if (e.tipo === 'aprobacion-cancel') return `
+    <div class="extra mini-card" style="background:#FAEEDA;border-color:#E8824A">
+      <span class="badge badge-amber">Cancelaciones siempre requieren confirmación</span>
+      <div style="font-size:11px;color:#633806;margin-top:4px;font-family:'Noto Sans JP',sans-serif">El encargado aprueba y Fudo registra el motivo.</div>
+    </div>`;
+  if (e.tipo === 'fudo') return `
+    <div class="extra mini-card">
+      <div class="mini-label">Orden en Fudo</div>
+      ${e.items.map(it => `<div class="mini-row"><span>${it}</span></div>`).join('')}
+      <div class="mini-total"><span>Total</span><span>${e.total}</span></div>
+      <div style="margin-top:8px;display:flex;gap:6px">
+        <span class="badge badge-green">${e.estado}</span>
+        <span class="badge badge-amber">Comanda generada</span>
+      </div>
+    </div>`;
+  if (e.tipo === 'fudo-cancel') return `
+    <div class="extra mini-card">
+      <div class="mini-label">Fudo — baja de orden</div>
+      <div style="display:flex;gap:6px;margin-top:4px">
+        <span class="badge badge-red">Orden cancelada</span>
+        <span class="badge badge-green">Stock restaurado</span>
+      </div>
+    </div>`;
+  if (e.tipo === 'tg') return `
+    <div class="extra tg-notif">
+      <div class="tg-top">
+        <div class="tg-av">TG</div>
+        <span class="tg-bot-name">Jurichi Bot · @jurichi_ops</span>
+      </div>
+      <span class="badge ${e.badgeClass}">${e.badge}</span>
+      <div class="tg-msg">${e.msg}</div>
+    </div>`;
+  return '';
+}
+
+function render() {
+  const caso = CASOS[casoActual];
+  const total = caso.pasos.length;
+
+  document.getElementById('btn-prev').disabled = pasoActual === 0;
+  document.getElementById('btn-next').disabled = pasoActual === total - 1;
+  document.getElementById('counter').textContent = `Paso ${pasoActual + 1} de ${total}`;
+
+  document.getElementById('wa-av').textContent = caso.av;
+  document.getElementById('wa-nombre').textContent = caso.nombre;
+  const waBody = document.getElementById('wa-body');
+  waBody.innerHTML = `<div class="wa-msg-in">${caso.waIn}<div class="wa-time">10:32</div></div>`;
+  if (pasoActual === total - 1) {
+    waBody.innerHTML += `<div class="wa-msg-out">${caso.waOut}<div class="wa-time">10:33</div></div>`;
+  }
+
+  const flujo = document.getElementById('flujo');
+  flujo.innerHTML = '';
+  caso.pasos.forEach((p, i) => {
+    const isDone = i < pasoActual;
+    const isActive = i === pasoActual;
+    const cls = isActive ? 'activo' : isDone ? 'hecho' : '';
+    const dotStyle = isActive
+      ? `background:${p.bg};color:${p.txt};border-color:${p.color};border-width:2px`
+      : isDone ? `background:#EAF3DE;color:#0F6E56;border-color:#1D9E75` : '';
+    const cardStyle = isActive
+      ? `border-color:${p.color};background:linear-gradient(${p.bg}30,#fff)`
+      : '';
+    const icon = isDone ? '✓' : (i + 1);
+    const extraHtml = isActive ? buildExtra(p.extra, p.color, p.bg) : '';
+
+    flujo.innerHTML += `
+      <div class="paso-row ${cls}">
+        <div class="paso-izq">
+          <div class="paso-dot" style="${dotStyle}">${icon}</div>
+          ${i < total - 1 ? '<div class="paso-linea"></div>' : ''}
+        </div>
+        <div class="paso-card" style="${cardStyle}">
+          <div class="paso-titulo" style="${isActive ? `color:${p.txt}` : ''}">${p.titulo}</div>
+          <div class="paso-desc">${p.desc}</div>
+          ${extraHtml}
+        </div>
+      </div>`;
+  });
+}
+
+function nextPaso() { if (pasoActual < CASOS[casoActual].pasos.length - 1) { pasoActual++; render(); } }
+function prevPaso() { if (pasoActual > 0) { pasoActual--; render(); } }
+function reset() { pasoActual = 0; render(); }
+
+buildTabs();
+render();
+</script>
+</body>
+</html>

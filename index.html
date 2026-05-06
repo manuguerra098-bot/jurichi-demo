@@ -9,7 +9,6 @@
 <style>
 :root {
   --rojo: #D63B2F;
-  --rojo-bg: #FCEBEB;
   --verde: #1D9E75;
   --verde-bg: #EAF3DE;
   --azul: #185FA5;
@@ -25,427 +24,98 @@
   --texto2: #6B6A65;
   --texto3: #999894;
 }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--texto);min-height:100vh}
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+header{border-bottom:1px solid var(--borde);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;background:#fff;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-kanji{font-family:'Noto Sans JP',sans-serif;font-size:20px;color:var(--rojo);font-weight:300}
+.logo-nombre{font-size:16px;font-weight:800;letter-spacing:.08em}
+.header-badge{font-size:11px;font-weight:500;background:#FCEBEB;color:var(--rojo);padding:4px 12px;border-radius:20px;letter-spacing:.04em}
 
-body {
-  font-family: 'Syne', sans-serif;
-  background: var(--bg);
-  color: var(--texto);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
+.hero{padding:4rem 2rem 3rem;max-width:860px;margin:0 auto;text-align:center}
+.hero-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:11px;color:var(--texto3);letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--borde2);padding:5px 14px;border-radius:20px;margin-bottom:1.8rem}
+.hero h1{font-size:clamp(2rem,5.5vw,3.4rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:1rem}
+.hero h1 span{color:var(--rojo)}
+.hero p{font-size:1rem;color:var(--texto2);max-width:500px;margin:0 auto 2rem;line-height:1.6;font-family:'Noto Sans JP',sans-serif}
 
-/* ── HEADER ── */
-header {
-  border-bottom: 1px solid var(--borde);
-  padding: 0 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 60px;
-  background: #fff;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.logo-kanji {
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 18px;
-  color: var(--rojo);
-  font-weight: 300;
-}
-.logo-nombre {
-  font-family: 'Syne', sans-serif;
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: var(--texto);
-}
-.header-badge {
-  font-size: 11px;
-  font-weight: 500;
-  background: var(--rojo-bg);
-  color: var(--rojo);
-  padding: 4px 10px;
-  border-radius: 20px;
-  letter-spacing: 0.04em;
-}
+.demo-wrap{max-width:860px;margin:0 auto;padding:0 2rem 4rem}
 
-/* ── HERO ── */
-.hero {
-  padding: 5rem 2rem 4rem;
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-}
-.hero-tag {
-  display: inline-block;
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: var(--texto3);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  border: 1px solid var(--borde2);
-  padding: 5px 12px;
-  border-radius: 20px;
-  margin-bottom: 2rem;
-}
-.hero h1 {
-  font-size: clamp(2.2rem, 6vw, 3.8rem);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  margin-bottom: 1.2rem;
-}
-.hero h1 span { color: var(--rojo); }
-.hero p {
-  font-size: 1.1rem;
-  color: var(--texto2);
-  font-weight: 400;
-  max-width: 520px;
-  margin: 0 auto 2.5rem;
-  line-height: 1.6;
-  font-family: 'Noto Sans JP', sans-serif;
-}
+.wa-device{background:#ECE5DD;border-radius:16px;overflow:hidden;border:1px solid var(--borde);margin-bottom:1rem}
+.wa-bar{background:#075E54;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.wa-av{width:36px;height:36px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;flex-shrink:0}
+.wa-info-name{color:#fff;font-size:13px;font-weight:500}
+.wa-info-sub{color:#b2dfdb;font-size:10px;font-family:'DM Mono',monospace}
+.wa-body{padding:12px 10px;min-height:120px;display:flex;flex-direction:column;gap:8px}
+.bubble-in{background:#fff;border-radius:0 10px 10px 10px;padding:8px 12px;font-size:13px;color:#111;max-width:88%;line-height:1.4;border:0.5px solid #ddd;font-family:'Noto Sans JP',sans-serif}
+.bubble-out{background:#DCF8C6;border-radius:10px 0 10px 10px;padding:8px 12px;font-size:13px;color:#111;max-width:88%;line-height:1.4;align-self:flex-end;font-family:'Noto Sans JP',sans-serif}
+.btime{font-size:9px;color:#888;text-align:right;margin-top:3px;font-family:'DM Mono',monospace}
 
-/* ── TABS DE ESCENARIOS ── */
-.tabs-wrap {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 2.5rem;
-  flex-wrap: wrap;
-}
-.tab {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  border: 1px solid var(--borde2);
-  border-radius: 30px;
-  background: #fff;
-  font-family: 'Syne', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all .2s;
-  color: var(--texto2);
-}
-.tab svg { width: 16px; height: 16px; }
-.tab:hover { border-color: var(--borde2); background: var(--bg); }
-.tab.active-pedido { background: var(--verde-bg); color: #0F6E56; border-color: var(--verde); }
-.tab.active-consulta { background: var(--azul-bg); color: var(--azul); border-color: #378ADD; }
-.tab.active-cancel { background: var(--rojo-bg); color: var(--rojo); border-color: var(--rojo); }
+.ejemplos{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem}
+.ej-label{font-size:11px;color:var(--texto3);align-self:center;font-family:'DM Mono',monospace}
+.ej{padding:5px 11px;border:0.5px solid var(--borde2);border-radius:20px;font-size:11px;cursor:pointer;color:var(--texto2);background:#fff;transition:all .15s;font-family:'Noto Sans JP',sans-serif}
+.ej:hover{border-color:var(--rojo);color:var(--rojo)}
 
-/* ── DEMO CONTAINER ── */
-.demo-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 2rem 4rem;
-}
+.input-row{display:flex;gap:8px;margin-bottom:1.5rem}
+.input-row input{flex:1;padding:11px 16px;border:1px solid var(--borde2);border-radius:30px;font-size:13px;background:#fff;color:var(--texto);font-family:'Noto Sans JP',sans-serif;outline:none}
+.input-row input:focus{border-color:var(--rojo)}
+.btn-env{padding:11px 22px;background:var(--rojo);color:#fff;border:none;border-radius:30px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;letter-spacing:.03em;transition:opacity .15s}
+.btn-env:disabled{opacity:.45;cursor:default}
 
-.demo-grid {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 1.5rem;
-  align-items: start;
-}
+.flujo{display:flex;flex-direction:column}
+.paso{display:flex;gap:12px;align-items:flex-start;opacity:.18;transition:opacity .35s}
+.paso.vis{opacity:1}
+.paso.dim{opacity:.45}
+.paso-col{display:flex;flex-direction:column;align-items:center;width:30px;flex-shrink:0}
+.dot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1.5px solid var(--borde2);background:var(--bg);color:var(--texto3);transition:all .3s;flex-shrink:0;font-family:'DM Mono',monospace}
+.linea{width:1.5px;flex:1;min-height:10px;background:var(--borde);margin:3px 0}
+.pcard{flex:1;border:0.5px solid var(--borde);border-radius:12px;padding:11px 14px;margin-bottom:10px;background:#fff;transition:border-color .3s}
+.ptit{font-size:12.5px;font-weight:700;margin-bottom:3px;letter-spacing:.01em}
+.psub{font-size:11.5px;color:var(--texto2);line-height:1.45;font-family:'Noto Sans JP',sans-serif}
 
-/* ── WHATSAPP MOCKUP ── */
-.wa-device {
-  background: #ECE5DD;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid var(--borde);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-}
-.wa-header {
-  background: #075E54;
-  padding: 12px 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.wa-avatar {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: #25D366;
-  display: flex; align-items: center; justify-content: center;
-  color: #fff;
-  font-family: 'Syne', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-.wa-info { flex: 1; }
-.wa-nombre { color: #fff; font-size: 13px; font-weight: 500; }
-.wa-status { color: #b2dfdb; font-size: 10px; font-family: 'DM Mono', monospace; }
-.wa-body {
-  padding: 12px 10px;
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.wa-msg-in {
-  background: #fff;
-  border-radius: 0 10px 10px 10px;
-  padding: 8px 11px;
-  font-size: 12.5px;
-  color: #111;
-  max-width: 90%;
-  line-height: 1.4;
-  font-family: 'Noto Sans JP', sans-serif;
-  border: 0.5px solid #e0ddd9;
-}
-.wa-msg-out {
-  background: #DCF8C6;
-  border-radius: 10px 0 10px 10px;
-  padding: 8px 11px;
-  font-size: 12.5px;
-  color: #111;
-  max-width: 90%;
-  line-height: 1.4;
-  align-self: flex-end;
-  font-family: 'Noto Sans JP', sans-serif;
-}
-.wa-time { font-size: 9px; color: #888; margin-top: 3px; text-align: right; font-family: 'DM Mono', monospace; }
-.wa-typing {
-  display: flex;
-  gap: 3px;
-  align-items: center;
-  padding: 4px 0;
-}
-.wa-typing span {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: #888;
-  animation: blink 1.2s infinite;
-}
-.wa-typing span:nth-child(2) { animation-delay: .2s; }
-.wa-typing span:nth-child(3) { animation-delay: .4s; }
-@keyframes blink { 0%,80%,100%{opacity:.3} 40%{opacity:1} }
+.rcard{margin-top:9px;background:var(--bg);border-radius:8px;padding:9px 11px;font-size:11px;border:0.5px solid var(--borde)}
+.rlabel{font-size:10px;color:var(--texto3);font-weight:500;margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em;font-family:'DM Mono',monospace}
+.rrow{display:flex;justify-content:space-between;color:var(--texto2);padding:2.5px 0;font-family:'Noto Sans JP',sans-serif}
+.rrow b{color:var(--texto);font-weight:500}
+.rtotal{display:flex;justify-content:space-between;font-weight:700;font-size:12px;padding-top:6px;margin-top:4px;border-top:0.5px solid var(--borde)}
 
-/* ── FLUJO ── */
-.flujo { display: flex; flex-direction: column; gap: 0; }
-.paso-row {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  opacity: 0.25;
-  transition: opacity .3s;
-}
-.paso-row.activo { opacity: 1; }
-.paso-row.hecho { opacity: 0.55; }
+.badge{display:inline-flex;align-items:center;padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:.03em;margin:2px 2px 0 0}
+.bg{background:var(--verde-bg);color:#0F6E56}
+.bb{background:var(--azul-bg);color:var(--azul)}
+.br{background:#FCEBEB;color:#A32D2D}
+.ba{background:var(--amber-bg);color:var(--amber)}
+.bp{background:#EEEDFE;color:#3C3489}
 
-.paso-izq {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 32px;
-  flex-shrink: 0;
-}
-.paso-dot {
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 13px;
-  flex-shrink: 0;
-  border: 1.5px solid var(--borde2);
-  background: var(--bg);
-  color: var(--texto3);
-  transition: all .3s;
-}
-.paso-row.activo .paso-dot {
-  border-width: 2px;
-}
-.paso-row.hecho .paso-dot {
-  border-color: var(--verde);
-  background: var(--verde-bg);
-  color: var(--verde);
-}
-.paso-linea {
-  width: 1.5px;
-  flex: 1;
-  min-height: 12px;
-  background: var(--borde);
-  margin: 4px 0;
-}
-.paso-card {
-  flex: 1;
-  background: var(--card);
-  border: 1px solid var(--borde);
-  border-radius: 12px;
-  padding: 12px 14px;
-  margin-bottom: 8px;
-  transition: border-color .3s, background .3s;
-}
-.paso-row.activo .paso-card {
-  border-width: 1.5px;
-}
-.paso-titulo {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-  margin-bottom: 3px;
-}
-.paso-desc {
-  font-size: 12px;
-  color: var(--texto2);
-  line-height: 1.5;
-  font-family: 'Noto Sans JP', sans-serif;
-}
+.ok-tag{display:inline-flex;padding:2px 8px;background:var(--verde-bg);color:#0F6E56;border-radius:20px;font-size:10px;font-weight:500;font-family:'DM Mono',monospace}
+.miss-tag{display:inline-flex;padding:2px 8px;background:var(--amber-bg);color:var(--amber);border-radius:20px;font-size:10px;font-weight:500;font-family:'DM Mono',monospace}
 
-/* ── EXTRAS DENTRO DE CARDS ── */
-.extra { margin-top: 10px; }
-.mini-card {
-  background: var(--bg);
-  border: 1px solid var(--borde);
-  border-radius: 8px;
-  padding: 8px 10px;
-  font-size: 11.5px;
-}
-.mini-label {
-  font-size: 10px;
-  color: var(--texto3);
-  font-family: 'DM Mono', monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 5px;
-}
-.mini-row {
-  display: flex;
-  justify-content: space-between;
-  color: var(--texto2);
-  padding: 2px 0;
-  font-family: 'Noto Sans JP', sans-serif;
-}
-.mini-row strong { color: var(--texto); font-weight: 500; }
-.mini-total {
-  display: flex;
-  justify-content: space-between;
-  font-weight: 700;
-  padding-top: 6px;
-  margin-top: 4px;
-  border-top: 1px solid var(--borde);
-  font-size: 12px;
-}
-.aprobacion-btns {
-  display: flex;
-  gap: 8px;
-  margin-top: 8px;
-}
-.btn-ap {
-  flex: 1;
-  padding: 7px;
-  border-radius: 8px;
-  font-family: 'Syne', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  border: 1.5px solid;
-  cursor: default;
-  text-align: center;
-}
-.btn-ap-ok { background: var(--verde-bg); color: #0F6E56; border-color: var(--verde); }
-.btn-ap-no { background: var(--rojo-bg); color: var(--rojo); border-color: var(--rojo); }
-.tg-notif {
-  background: #E8F6FD;
-  border: 1px solid #229ED9;
-  border-radius: 8px;
-  padding: 10px 12px;
-  margin-top: 8px;
-}
-.tg-top {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 6px;
-}
-.tg-av {
-  width: 24px; height: 24px;
-  border-radius: 50%;
-  background: #229ED9;
-  display: flex; align-items: center; justify-content: center;
-  color: #fff;
-  font-size: 9px;
-  font-weight: 700;
-}
-.tg-bot-name { font-size: 11px; font-weight: 700; color: #185FA5; font-family: 'DM Mono', monospace; }
-.tg-msg { font-size: 11.5px; color: #0d3a5c; line-height: 1.5; font-family: 'Noto Sans JP', sans-serif; white-space: pre-line; }
+.aprov{display:flex;gap:7px;margin-top:9px}
+.abtn{flex:1;padding:7px;border-radius:8px;font-family:'Syne',sans-serif;font-size:11.5px;font-weight:700;border:1px solid;text-align:center}
+.aok{background:var(--verde-bg);color:#0F6E56;border-color:var(--verde)}
+.ano{background:#FCEBEB;color:#A32D2D;border-color:var(--rojo)}
 
-/* ── BADGE ── */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 9px;
-  border-radius: 20px;
-  font-size: 10.5px;
-  font-weight: 700;
-  font-family: 'DM Mono', monospace;
-  letter-spacing: 0.04em;
-  margin-bottom: 6px;
-}
-.badge-green { background: var(--verde-bg); color: #0F6E56; }
-.badge-red { background: var(--rojo-bg); color: var(--rojo); }
-.badge-blue { background: var(--azul-bg); color: var(--azul); }
-.badge-amber { background: var(--amber-bg); color: var(--amber); }
+.tg-box{background:#E8F6FD;border:1px solid var(--tg);border-radius:10px;padding:10px 13px;margin-top:9px}
+.tg-top{display:flex;align-items:center;gap:7px;margin-bottom:6px}
+.tg-av{width:24px;height:24px;border-radius:50%;background:var(--tg);display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:700}
+.tg-name{font-size:11px;font-weight:700;color:var(--azul);font-family:'DM Mono',monospace}
+.tg-msg{font-size:11.5px;color:#0d3a5c;line-height:1.5;white-space:pre-line;font-family:'Noto Sans JP',sans-serif}
 
-/* ── CONTROLES ── */
-.controles {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--borde);
-}
-.ctrl-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 9px 18px;
-  border: 1px solid var(--borde2);
-  border-radius: 30px;
-  background: #fff;
-  font-family: 'Syne', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all .15s;
-  color: var(--texto);
-}
-.ctrl-btn:hover:not(:disabled) { background: var(--bg); border-color: var(--texto2); }
-.ctrl-btn:disabled { opacity: 0.3; cursor: default; }
-.ctrl-btn.primary { background: var(--texto); color: #fff; border-color: var(--texto); }
-.ctrl-btn.primary:hover:not(:disabled) { background: #333; border-color: #333; }
-.ctrl-counter { font-size: 12px; color: var(--texto3); font-family: 'DM Mono', monospace; margin-left: 4px; }
-.ctrl-reset { margin-left: auto; font-size: 12px; color: var(--texto3); background: none; border: none; cursor: pointer; font-family: 'Syne', sans-serif; text-decoration: underline; }
+.typing{display:flex;gap:4px;align-items:center;padding:4px 0}
+.typing span{width:6px;height:6px;border-radius:50%;background:#888;animation:blink 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.2s}
+.typing span:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
 
-/* ── FOOTER ── */
-footer {
-  text-align: center;
-  padding: 2rem;
-  border-top: 1px solid var(--borde);
-  font-size: 12px;
-  color: var(--texto3);
-  font-family: 'DM Mono', monospace;
-}
-footer span { color: var(--rojo); }
+.reset-btn{display:none;margin-top:1.2rem;font-size:12px;color:var(--texto3);background:none;border:none;cursor:pointer;text-decoration:underline;font-family:'Syne',sans-serif}
 
-@media (max-width: 600px) {
-  .demo-grid { grid-template-columns: 1fr; }
-  .wa-device { max-width: 280px; margin: 0 auto; }
-  .hero h1 { font-size: 2rem; }
-  header { padding: 0 1rem; }
-  .demo-container { padding: 0 1rem 3rem; }
-  .hero { padding: 3rem 1rem 2rem; }
+footer{text-align:center;padding:2rem;border-top:1px solid var(--borde);font-size:11px;color:var(--texto3);font-family:'DM Mono',monospace}
+footer span{color:var(--rojo)}
+
+@media(max-width:600px){
+  header{padding:0 1rem}
+  .hero{padding:2.5rem 1rem 2rem}
+  .demo-wrap{padding:0 1rem 3rem}
+  .hero h1{font-size:1.9rem}
 }
 </style>
 </head>
@@ -456,259 +126,274 @@ footer span { color: var(--rojo); }
     <span class="logo-kanji">ジュリチ</span>
     <span class="logo-nombre">JURICHI</span>
   </div>
-  <span class="header-badge">DEMO · SISTEMA IA</span>
+  <span class="header-badge">DEMO EN VIVO · IA REAL</span>
 </header>
 
 <div class="hero">
-  <div class="hero-tag">Simulación interactiva · Automatización de pedidos</div>
+  <div class="hero-tag">Simulación interactiva · Sistema de pedidos con IA</div>
   <h1>Pedidos que se<br>procesan <span>solos</span></h1>
-  <p>Así funciona el sistema de IA para Jurichi. Elegí un escenario y navegá el flujo paso a paso.</p>
+  <p>Escribí un mensaje como si fueras un cliente de Jurichi y vé cómo el sistema lo procesa en tiempo real.</p>
 </div>
 
-<div class="demo-container">
-  <div class="tabs-wrap" id="tabs"></div>
+<div class="demo-wrap">
 
-  <div class="demo-grid">
-    <div>
-      <div class="wa-device">
-        <div class="wa-header">
-          <div class="wa-avatar" id="wa-av">MG</div>
-          <div class="wa-info">
-            <div class="wa-nombre" id="wa-nombre">Maria G.</div>
-            <div class="wa-status">en línea</div>
-          </div>
-        </div>
-        <div class="wa-body" id="wa-body"></div>
+  <div class="wa-device">
+    <div class="wa-bar">
+      <div class="wa-av" id="wa-av">?</div>
+      <div>
+        <div class="wa-info-name" id="wa-name">Cliente</div>
+        <div class="wa-info-sub">en línea</div>
       </div>
     </div>
-    <div>
-      <div class="flujo" id="flujo"></div>
+    <div class="wa-body" id="wa-body">
+      <div style="font-size:12px;color:#888;text-align:center;padding:1.5rem 0;font-family:'Noto Sans JP',sans-serif">Escribí abajo el mensaje del cliente para ver cómo responde el sistema</div>
     </div>
   </div>
 
-  <div class="controles">
-    <button class="ctrl-btn" id="btn-prev" onclick="prevPaso()">← Anterior</button>
-    <button class="ctrl-btn primary" id="btn-next" onclick="nextPaso()">Siguiente →</button>
-    <span class="ctrl-counter" id="counter">Paso 1 de 5</span>
-    <button class="ctrl-reset" onclick="reset()">Reiniciar</button>
+  <div class="ejemplos">
+    <span class="ej-label">Probá:</span>
+    <button class="ej" onclick="setEj(this)">mandame 10 de salmon y 5 spicy tuna para las 13hs, pago con transferencia</button>
+    <button class="ej" onclick="setEj(this)">quiero 3 pokes de salmon</button>
+    <button class="ej" onclick="setEj(this)">tienen gluten los onigiris?</button>
+    <button class="ej" onclick="setEj(this)">cancelo el pedido de hoy</button>
   </div>
+
+  <div class="input-row">
+    <input type="text" id="msg-input" placeholder="Escribí el mensaje del cliente..." onkeydown="if(event.key==='Enter')enviar()"/>
+    <button class="btn-env" id="btn-env" onclick="enviar()">Enviar →</button>
+  </div>
+
+  <div class="flujo" id="flujo"></div>
+  <button class="reset-btn" id="reset-btn" onclick="resetDemo()">← Nueva demo</button>
+
 </div>
 
-<footer>
-  <p>Jurichi · Sistema de Automatización con IA · <span>©2026</span></p>
-</footer>
+<footer>ジュリチ · JURICHI · Sistema de Automatización con IA · <span>©2026</span></footer>
 
 <script>
-const CASOS = [
-  {
-    tab: "Pedido nuevo", tabClass: "active-pedido",
-    nombre: "Maria G.", av: "MG",
-    waIn: "hola! mándame 10 onigiri de salmón y 5 spicy tuna porfa",
-    waOut: "Pedido recibido, Maria. Te confirmamos en un momento!",
-    pasos: [
-      { color:"#1D9E75", bg:"#EAF3DE", txt:"#0F6E56",
-        titulo:"WhatsApp recibe el mensaje",
-        desc:"\"hola! mándame 10 onigiri de salmón y 5 spicy tuna porfa\"",
-        extra: null },
-      { color:"#185FA5", bg:"#E6F1FB", txt:"#185FA5",
-        titulo:"Claude AI interpreta el pedido",
-        desc:"Identifica cliente, productos y cantidades aunque el texto sea informal.",
-        extra: {tipo:"ia", items:["10× Onigiri Salmón","5× Spicy Tuna"], total:"$22.500", conf:"Alta"} },
-      { color:"#1D9E75", bg:"#EAF3DE", txt:"#0F6E56",
-        titulo:"Encargado aprueba (Nivel 1)",
-        desc:"Le llega el resumen. Aprueba o rechaza con un toque.",
-        extra: {tipo:"aprobacion"} },
-      { color:"#854F0B", bg:"#FAEEDA", txt:"#854F0B",
-        titulo:"Fudo registra la orden",
-        desc:"Entra a Fudo, se genera comanda en cocina y se descuenta stock.",
-        extra: {tipo:"fudo", items:["10× Onigiri Salmón","5× Spicy Tuna"], total:"$22.500", estado:"Confirmado"} },
-      { color:"#229ED9", bg:"#E8F6FD", txt:"#185FA5",
-        titulo:"Telegram notifica al grupo",
-        desc:"Todo el equipo ve el pedido en tiempo real.",
-        extra: {tipo:"tg", badge:"PEDIDO NUEVO", badgeClass:"badge-green",
-          msg:"Cliente: Maria G.\n10× Onigiri Salmón · 5× Spicy Tuna\nTotal: $22.500 · Canal: WhatsApp"} }
-    ]
-  },
-  {
-    tab: "Consulta", tabClass: "active-consulta",
-    nombre: "Carlos V.", av: "CV",
-    waIn: "che, tienen gluten los onigiris? tengo celiaquía",
-    waOut: "Hola Carlos! Tu consulta fue enviada al equipo, te responden ya",
-    pasos: [
-      { color:"#185FA5", bg:"#E6F1FB", txt:"#185FA5",
-        titulo:"WhatsApp recibe el mensaje",
-        desc:"\"che, tienen gluten los onigiris? tengo celiaquía\"",
-        extra: null },
-      { color:"#185FA5", bg:"#E6F1FB", txt:"#185FA5",
-        titulo:"Claude AI clasifica el mensaje",
-        desc:"Detecta que no es un pedido — es una consulta sobre ingredientes.",
-        extra: {tipo:"clasificacion", label:"No es pedido — es una consulta", cls:"badge-blue"} },
-      { color:"#229ED9", bg:"#E8F6FD", txt:"#185FA5",
-        titulo:"Telegram alerta al equipo",
-        desc:"El grupo recibe la consulta con el texto original para responder.",
-        extra: {tipo:"tg", badge:"CONSULTA", badgeClass:"badge-blue",
-          msg:"Cliente: Carlos V.\n\"tienen gluten los onigiris? tengo celiaquía\"\nRequiere respuesta manual"} },
-      { color:"#1D9E75", bg:"#EAF3DE", txt:"#0F6E56",
-        titulo:"Equipo responde directamente",
-        desc:"Un integrante ve la alerta y responde al cliente desde WhatsApp.",
-        extra: null },
-      { color:"#1D9E75", bg:"#EAF3DE", txt:"#0F6E56",
-        titulo:"Consulta resuelta",
-        desc:"El cliente recibió respuesta sin que Julián tuviera que estar mirando el teléfono.",
-        extra: null }
-    ]
-  },
-  {
-    tab: "Cancelación", tabClass: "active-cancel",
-    nombre: "Laura M.", av: "LM",
-    waIn: "disculpá, necesito cancelar el pedido de hoy, cambié de planes",
-    waOut: "Entendido Laura, tu pedido fue cancelado. Cualquier cosa avisanos!",
-    pasos: [
-      { color:"#D63B2F", bg:"#FCEBEB", txt:"#A32D2D",
-        titulo:"WhatsApp recibe la cancelación",
-        desc:"\"necesito cancelar el pedido de hoy, cambié de planes\"",
-        extra: null },
-      { color:"#185FA5", bg:"#E6F1FB", txt:"#185FA5",
-        titulo:"Claude AI detecta cancelación",
-        desc:"Identifica la intención de cancelar y localiza el pedido activo de Laura.",
-        extra: {tipo:"clasificacion", label:"Cancelación detectada", cls:"badge-red"} },
-      { color:"#D63B2F", bg:"#FCEBEB", txt:"#A32D2D",
-        titulo:"Encargado confirma la baja",
-        desc:"Las cancelaciones siempre requieren aprobación humana — nunca son automáticas.",
-        extra: {tipo:"aprobacion-cancel"} },
-      { color:"#854F0B", bg:"#FAEEDA", txt:"#854F0B",
-        titulo:"Fudo da de baja la orden",
-        desc:"La orden se cancela. El stock vuelve a su estado anterior. Queda registro.",
-        extra: {tipo:"fudo-cancel"} },
-      { color:"#229ED9", bg:"#E8F6FD", txt:"#185FA5",
-        titulo:"Telegram notifica la baja",
-        desc:"El grupo recibe la notificación con detalle del pedido anulado.",
-        extra: {tipo:"tg", badge:"CANCELACIÓN", badgeClass:"badge-red",
-          msg:"Cliente: Laura M.\nPedido cancelado por el cliente\nStock restaurado · P&L actualizado"} }
-    ]
-  }
+const PASOS = [
+  {id:'wa',    dot:'01', color:'#1D9E75', bg:'#EAF3DE', txt:'#0F6E56', tit:'WhatsApp recibe el mensaje',        sub:'Mensaje entrante capturado por el sistema.'},
+  {id:'ia',    dot:'02', color:'#185FA5', bg:'#E6F1FB', txt:'#185FA5', tit:'Claude AI analiza el mensaje',      sub:'La IA clasifica e interpreta el contenido.'},
+  {id:'datos', dot:'03', color:'#854F0B', bg:'#FAEEDA', txt:'#854F0B', tit:'Verificación de datos del pedido',  sub:'Se valida que el pedido tenga toda la info necesaria.'},
+  {id:'enc',   dot:'04', color:'#D63B2F', bg:'#FCEBEB', txt:'#A32D2D', tit:'Encargado aprueba',                 sub:'Confirmación humana antes de registrar.'},
+  {id:'fudo',  dot:'05', color:'#854F0B', bg:'#FAEEDA', txt:'#854F0B', tit:'Fudo registra la orden',            sub:'La acción se ejecuta en el sistema.'},
+  {id:'tg',    dot:'06', color:'#229ED9', bg:'#E8F6FD', txt:'#185FA5', tit:'Telegram notifica al grupo',        sub:'Todo el equipo queda informado en tiempo real.'},
 ];
 
-let casoActual = 0, pasoActual = 0;
+let resultado = null;
 
-function buildTabs() {
-  const wrap = document.getElementById('tabs');
-  wrap.innerHTML = '';
-  CASOS.forEach((c, i) => {
-    const b = document.createElement('button');
-    b.className = 'tab' + (i === casoActual ? ' ' + c.tabClass : '');
-    b.innerHTML = c.tab;
-    b.onclick = () => { casoActual = i; pasoActual = 0; buildTabs(); render(); };
-    wrap.appendChild(b);
-  });
+function setEj(btn){ document.getElementById('msg-input').value = btn.textContent; }
+
+function resetDemo(){
+  resultado = null;
+  document.getElementById('flujo').innerHTML = '';
+  document.getElementById('wa-body').innerHTML = '<div style="font-size:12px;color:#888;text-align:center;padding:1.5rem 0;font-family:\'Noto Sans JP\',sans-serif">Escribí abajo el mensaje del cliente para ver cómo responde el sistema</div>';
+  document.getElementById('wa-av').textContent = '?';
+  document.getElementById('wa-name').textContent = 'Cliente';
+  document.getElementById('msg-input').value = '';
+  document.getElementById('btn-env').disabled = false;
+  document.getElementById('reset-btn').style.display = 'none';
 }
 
-function buildExtra(extra, pasoColor, pasoBg) {
-  if (!extra) return '';
-  const e = extra;
-  if (e.tipo === 'ia') return `
-    <div class="extra mini-card">
-      <div class="mini-label">Pedido interpretado</div>
-      ${e.items.map(it => `<div class="mini-row"><span>${it}</span></div>`).join('')}
-      <div class="mini-total"><span>Total</span><span>${e.total}</span></div>
-      <div style="margin-top:8px"><span class="badge badge-green">Confianza: ${e.conf}</span></div>
-    </div>`;
-  if (e.tipo === 'clasificacion') return `
-    <div class="extra" style="padding:7px 10px;background:${pasoBg};border-radius:8px;border:1px solid ${pasoColor}33">
-      <span class="badge ${e.cls}">${e.label}</span>
-    </div>`;
-  if (e.tipo === 'aprobacion') return `
-    <div class="extra aprobacion-btns">
-      <div class="btn-ap btn-ap-ok">✓ Aprobar</div>
-      <div class="btn-ap btn-ap-no">✗ Rechazar</div>
-    </div>`;
-  if (e.tipo === 'aprobacion-cancel') return `
-    <div class="extra mini-card" style="background:#FAEEDA;border-color:#E8824A">
-      <span class="badge badge-amber">Cancelaciones siempre requieren confirmación</span>
-      <div style="font-size:11px;color:#633806;margin-top:4px;font-family:'Noto Sans JP',sans-serif">El encargado aprueba y Fudo registra el motivo.</div>
-    </div>`;
-  if (e.tipo === 'fudo') return `
-    <div class="extra mini-card">
-      <div class="mini-label">Orden en Fudo</div>
-      ${e.items.map(it => `<div class="mini-row"><span>${it}</span></div>`).join('')}
-      <div class="mini-total"><span>Total</span><span>${e.total}</span></div>
-      <div style="margin-top:8px;display:flex;gap:6px">
-        <span class="badge badge-green">${e.estado}</span>
-        <span class="badge badge-amber">Comanda generada</span>
-      </div>
-    </div>`;
-  if (e.tipo === 'fudo-cancel') return `
-    <div class="extra mini-card">
-      <div class="mini-label">Fudo — baja de orden</div>
-      <div style="display:flex;gap:6px;margin-top:4px">
-        <span class="badge badge-red">Orden cancelada</span>
-        <span class="badge badge-green">Stock restaurado</span>
-      </div>
-    </div>`;
-  if (e.tipo === 'tg') return `
-    <div class="extra tg-notif">
-      <div class="tg-top">
-        <div class="tg-av">TG</div>
-        <span class="tg-bot-name">Jurichi Bot · @jurichi_ops</span>
-      </div>
-      <span class="badge ${e.badgeClass}">${e.badge}</span>
-      <div class="tg-msg">${e.msg}</div>
-    </div>`;
-  return '';
-}
+async function enviar(){
+  const input = document.getElementById('msg-input');
+  const msg = input.value.trim();
+  if(!msg) return;
+  document.getElementById('btn-env').disabled = true;
+  document.getElementById('reset-btn').style.display = 'none';
 
-function render() {
-  const caso = CASOS[casoActual];
-  const total = caso.pasos.length;
+  const clientes = [{n:'Maria G.',i:'MG'},{n:'Carlos V.',i:'CV'},{n:'Laura M.',i:'LM'},{n:'Diego R.',i:'DR'},{n:'Ana P.',i:'AP'}];
+  const cli = clientes[Math.floor(Math.random() * clientes.length)];
+  document.getElementById('wa-av').textContent = cli.i;
+  document.getElementById('wa-name').textContent = cli.n;
 
-  document.getElementById('btn-prev').disabled = pasoActual === 0;
-  document.getElementById('btn-next').disabled = pasoActual === total - 1;
-  document.getElementById('counter').textContent = `Paso ${pasoActual + 1} de ${total}`;
-
-  document.getElementById('wa-av').textContent = caso.av;
-  document.getElementById('wa-nombre').textContent = caso.nombre;
   const waBody = document.getElementById('wa-body');
-  waBody.innerHTML = `<div class="wa-msg-in">${caso.waIn}<div class="wa-time">10:32</div></div>`;
-  if (pasoActual === total - 1) {
-    waBody.innerHTML += `<div class="wa-msg-out">${caso.waOut}<div class="wa-time">10:33</div></div>`;
+  const isFirst = waBody.querySelector('[style*="text-align:center"]');
+  if(isFirst) waBody.innerHTML = '';
+  waBody.innerHTML += `<div class="bubble-in">${msg}<div class="btime">ahora</div></div>`;
+
+  renderFlujo(1, null);
+  await delay(500);
+  renderFlujo(2, null);
+
+  const typing = document.createElement('div');
+  typing.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+  waBody.appendChild(typing);
+
+  const prompt = `Sos el sistema de pedidos de Jurichi, restaurante de onigiris y pokes en Buenos Aires.
+Analizá este mensaje de WhatsApp y respondé SOLO con JSON válido, sin markdown ni texto extra.
+
+Mensaje: "${msg}"
+Cliente: ${cli.n}
+
+Menú con precios unitarios:
+- Onigiri Salmón: $1800
+- Onigiri Spicy Tuna: $1800
+- Onigiri Normal: $1500
+- Poke Salmón: $2500
+- Poke Atún: $2400
+
+Para un pedido completo se necesitan TRES datos obligatorios:
+1. horario_entrega: a qué hora quiere el pedido (null si no lo dijo)
+2. medio_pago: cómo va a pagar — efectivo, transferencia, mercado pago, tarjeta (null si no lo dijo)
+3. tipo_entrega: "delivery" o "retiro en local" (null si no está claro)
+
+Respondé con este JSON exacto:
+{
+  "tipo": "pedido" | "consulta" | "cancelacion",
+  "confianza": "Alta" | "Media" | "Baja",
+  "resumen": "frase corta de lo que entendiste",
+  "items": [{"nombre": "...", "cantidad": N, "precio": N}],
+  "total": N,
+  "horario_entrega": "..." | null,
+  "medio_pago": "..." | null,
+  "tipo_entrega": "delivery" | "retiro en local" | null,
+  "datos_faltantes": ["horario_entrega", "medio_pago", "tipo_entrega"],
+  "pedido_completo": true | false,
+  "respuesta_cliente": "mensaje al cliente — si faltan datos, preguntale de forma amigable y concisa en una sola pregunta",
+  "notif_telegram": "texto para el grupo interno del equipo con todos los detalles relevantes"
+}
+datos_faltantes lista solo los que realmente faltan. pedido_completo es true solo si los tres datos están presentes Y es un pedido.`;
+
+  let d = null;
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, messages: [{ role: 'user', content: prompt }] })
+    });
+    const json = await res.json();
+    const raw = json.content?.find(b => b.type === 'text')?.text || '{}';
+    d = JSON.parse(raw.replace(/```json|```/g, '').trim());
+  } catch(e) {
+    d = { tipo:'pedido', confianza:'Media', resumen:'No se pudo procesar', items:[], total:0, horario_entrega:null, medio_pago:null, tipo_entrega:null, datos_faltantes:['horario_entrega','medio_pago','tipo_entrega'], pedido_completo:false, respuesta_cliente:'Gracias por tu mensaje, te respondemos en un momento.', notif_telegram:'Mensaje recibido — revisar manualmente.' };
   }
 
+  resultado = { ...d, cliente: cli.n, msg };
+  typing.remove();
+
+  await delay(300); renderFlujo(3, resultado);
+  await delay(600); renderFlujo(4, resultado);
+  await delay(500); renderFlujo(5, resultado);
+  await delay(500); renderFlujo(6, resultado);
+
+  waBody.innerHTML += `<div class="bubble-out">${d.respuesta_cliente}<div class="btime">ahora</div></div>`;
+  document.getElementById('reset-btn').style.display = 'block';
+  document.getElementById('btn-env').disabled = false;
+  document.getElementById('msg-input').value = '';
+  document.getElementById('msg-input').focus();
+}
+
+function renderFlujo(etapa, data){
   const flujo = document.getElementById('flujo');
   flujo.innerHTML = '';
-  caso.pasos.forEach((p, i) => {
-    const isDone = i < pasoActual;
-    const isActive = i === pasoActual;
-    const cls = isActive ? 'activo' : isDone ? 'hecho' : '';
-    const dotStyle = isActive
+  PASOS.forEach((p, i) => {
+    const activo = i === etapa - 1;
+    const hecho  = i < etapa - 1;
+    const cls    = activo ? 'vis' : hecho ? 'dim' : '';
+    const dotStyle = activo
       ? `background:${p.bg};color:${p.txt};border-color:${p.color};border-width:2px`
-      : isDone ? `background:#EAF3DE;color:#0F6E56;border-color:#1D9E75` : '';
-    const cardStyle = isActive
-      ? `border-color:${p.color};background:linear-gradient(${p.bg}30,#fff)`
-      : '';
-    const icon = isDone ? '✓' : (i + 1);
-    const extraHtml = isActive ? buildExtra(p.extra, p.color, p.bg) : '';
-
+      : hecho ? `background:#EAF3DE;color:#0F6E56;border-color:#1D9E75` : '';
+    const cardStyle = activo ? `border-color:${p.color};border-width:1.5px` : '';
+    const dot   = hecho ? '✓' : p.dot;
+    const sub   = activo && data ? getSub(p.id, data) : p.sub;
+    const extra = activo && data ? getExtra(p.id, data) : '';
     flujo.innerHTML += `
-      <div class="paso-row ${cls}">
-        <div class="paso-izq">
-          <div class="paso-dot" style="${dotStyle}">${icon}</div>
-          ${i < total - 1 ? '<div class="paso-linea"></div>' : ''}
+      <div class="paso ${cls}">
+        <div class="paso-col">
+          <div class="dot" style="${dotStyle}">${dot}</div>
+          ${i < PASOS.length - 1 ? '<div class="linea"></div>' : ''}
         </div>
-        <div class="paso-card" style="${cardStyle}">
-          <div class="paso-titulo" style="${isActive ? `color:${p.txt}` : ''}">${p.titulo}</div>
-          <div class="paso-desc">${p.desc}</div>
-          ${extraHtml}
+        <div class="pcard" style="${cardStyle}">
+          <div class="ptit" style="${activo ? `color:${p.txt}` : ''}">${p.tit}</div>
+          <div class="psub">${sub}</div>
+          ${extra}
         </div>
       </div>`;
   });
 }
 
-function nextPaso() { if (pasoActual < CASOS[casoActual].pasos.length - 1) { pasoActual++; render(); } }
-function prevPaso() { if (pasoActual > 0) { pasoActual--; render(); } }
-function reset() { pasoActual = 0; render(); }
+function getSub(id, d){
+  if(id==='wa')    return `Mensaje de ${d.cliente}: "${d.msg}"`;
+  if(id==='ia')    return `Tipo: ${d.tipo==='pedido'?'Pedido':d.tipo==='cancelacion'?'Cancelación':'Consulta'} · Confianza: ${d.confianza}`;
+  if(id==='datos') return d.tipo!=='pedido' ? 'No aplica — no es un pedido.' : d.pedido_completo ? 'Todos los datos presentes. Listo para aprobar.' : `Faltan ${(d.datos_faltantes||[]).length} dato(s) — el sistema los pide al cliente.`;
+  if(id==='enc')   return d.tipo==='cancelacion' ? 'Las cancelaciones siempre requieren confirmación manual.' : d.pedido_completo ? 'Pedido completo listo para aprobar.' : 'En espera de datos faltantes del cliente.';
+  if(id==='fudo')  return d.tipo==='pedido' && d.pedido_completo ? 'Orden registrada, comanda generada, stock descontado.' : d.tipo==='cancelacion' ? 'Orden cancelada. Stock restaurado.' : d.tipo==='pedido' ? 'En espera — se pidió info al cliente.' : 'Consulta registrada, sin impacto en stock.';
+  if(id==='tg')    return 'Notificación enviada al grupo del equipo.';
+  return '';
+}
 
-buildTabs();
-render();
+function labelDato(k){ return k==='horario_entrega'?'Horario de entrega':k==='medio_pago'?'Medio de pago':'Delivery o retiro'; }
+
+function getExtra(id, d){
+  if(id==='ia'){
+    const cls = d.tipo==='pedido'?'bg':d.tipo==='cancelacion'?'br':'bb';
+    const lbl = d.tipo==='pedido'?'Pedido':d.tipo==='cancelacion'?'Cancelación':'Consulta';
+    let h = `<div class="rcard"><div class="rlabel">Análisis de Claude</div>`;
+    h += `<div class="rrow"><span>Tipo</span><b>${lbl}</b></div>`;
+    h += `<div class="rrow"><span>Resumen</span><b>${d.resumen}</b></div>`;
+    if(d.items && d.items.length){
+      d.items.forEach(it => { h += `<div class="rrow"><span>${it.nombre} ×${it.cantidad}</span><b>$${(it.precio*it.cantidad).toLocaleString('es-AR')}</b></div>`; });
+      h += `<div class="rtotal"><span>Total estimado</span><span>$${d.total.toLocaleString('es-AR')}</span></div>`;
+    }
+    h += `<div style="margin-top:6px"><span class="badge ${cls}">${lbl}</span> <span class="badge bp">Confianza: ${d.confianza}</span></div></div>`;
+    return h;
+  }
+
+  if(id==='datos'){
+    if(d.tipo!=='pedido') return `<div class="rcard"><span class="badge bb">Sin validación — no es un pedido</span></div>`;
+    const campos = ['horario_entrega','medio_pago','tipo_entrega'];
+    const faltantes = d.datos_faltantes || [];
+    let h = `<div class="rcard"><div class="rlabel">Datos del pedido</div>`;
+    campos.forEach(c => {
+      const val = d[c];
+      const falta = faltantes.includes(c);
+      h += `<div class="rrow"><span>${labelDato(c)}</span>${falta ? '<span class="miss-tag">⚠ Falta</span>' : `<span class="ok-tag">✓ ${val}</span>`}</div>`;
+    });
+    if(d.pedido_completo){
+      h += `<div style="margin-top:6px"><span class="badge bg">✓ Pedido completo</span></div>`;
+    } else {
+      h += `<div style="margin-top:8px;background:var(--amber-bg);border:0.5px solid #E8824A;border-radius:8px;padding:8px 10px">`;
+      h += `<div style="font-size:10px;font-weight:500;color:#633806;margin-bottom:4px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.05em">El sistema le pregunta al cliente</div>`;
+      faltantes.forEach(f => { h += `<div style="font-size:11px;color:#854F0B;padding:1px 0;font-family:'Noto Sans JP',sans-serif">→ ${labelDato(f)}</div>`; });
+      h += `</div>`;
+    }
+    h += `</div>`;
+    return h;
+  }
+
+  if(id==='enc'){
+    if(d.tipo==='cancelacion') return `<div class="rcard" style="background:var(--amber-bg);border-color:#E8824A"><span class="badge ba">Confirmación obligatoria — nunca automática</span><div class="aprov"><div class="abtn aok">✓ Confirmar baja</div><div class="abtn ano">✗ Mantener pedido</div></div></div>`;
+    if(!d.pedido_completo) return `<div class="rcard"><span class="badge ba">En espera — pidiendo datos al cliente</span></div>`;
+    return `<div class="rcard"><div class="aprov"><div class="abtn aok">✓ Aprobar pedido</div><div class="abtn ano">✗ Rechazar</div></div></div>`;
+  }
+
+  if(id==='fudo'){
+    if(d.tipo==='consulta') return `<div class="rcard"><span class="badge bb">Consulta registrada — sin impacto en stock</span></div>`;
+    if(d.tipo==='cancelacion') return `<div class="rcard"><span class="badge br">Orden cancelada</span> <span class="badge bg">Stock restaurado</span></div>`;
+    if(!d.pedido_completo) return `<div class="rcard"><span class="badge ba">En espera de datos del cliente</span></div>`;
+    let h = `<div class="rcard"><div class="rlabel">Orden registrada en Fudo</div>`;
+    if(d.items && d.items.length){
+      d.items.forEach(it => { h += `<div class="rrow"><span>${it.nombre} ×${it.cantidad}</span><b>$${(it.precio*it.cantidad).toLocaleString('es-AR')}</b></div>`; });
+      h += `<div class="rtotal"><span>Total</span><span>$${d.total.toLocaleString('es-AR')}</span></div>`;
+    }
+    h += `<div style="margin-top:7px;display:flex;gap:4px;flex-wrap:wrap">`;
+    if(d.horario_entrega) h += `<span class="badge bp">⏱ ${d.horario_entrega}</span>`;
+    if(d.medio_pago) h += `<span class="badge bb">💳 ${d.medio_pago}</span>`;
+    if(d.tipo_entrega) h += `<span class="badge bg">${d.tipo_entrega}</span>`;
+    h += `<span class="badge ba">Comanda generada</span></div></div>`;
+    return h;
+  }
+
+  if(id==='tg'){
+    const cls = d.tipo==='pedido'?'bg':d.tipo==='cancelacion'?'br':'bb';
+    const lbl = d.tipo==='pedido'?'PEDIDO NUEVO':d.tipo==='cancelacion'?'CANCELACIÓN':'CONSULTA';
+    return `<div class="tg-box"><div class="tg-top"><div class="tg-av">TG</div><span class="tg-name">Jurichi Bot · @jurichi_ops</span></div><span class="badge ${cls}" style="margin-bottom:7px">${lbl}</span><div class="tg-msg">${d.notif_telegram}</div></div>`;
+  }
+  return '';
+}
+
+function delay(ms){ return new Promise(r => setTimeout(r, ms)); }
 </script>
 </body>
 </html>
